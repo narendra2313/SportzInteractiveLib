@@ -1,14 +1,20 @@
 package com.example.silibrary
 
+import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.annotation.DrawableRes
+import androidx.annotation.StyleRes
 import androidx.core.content.ContextCompat
+import androidx.core.widget.TextViewCompat
 import coil.load
 import coil.request.Disposable
 import coil.request.ImageRequest
 
 import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerDrawable
+import com.google.android.material.tabs.TabLayout
 
 fun ImageView.loadWithShimmer(
     url: String?,
@@ -32,4 +38,20 @@ fun ImageView.loadWithShimmer(
     },
 ): Disposable {
     return load(url, builder = builder)
+}
+
+fun changeSelectedTabAppearance(
+    tabLayout: TabLayout,
+    tabPosition: Int,
+    @StyleRes textAppearanceRes: Int
+) {
+    try {
+        val linearLayout =
+            (tabLayout.getChildAt(0) as? ViewGroup)?.getChildAt(tabPosition) as? LinearLayout
+        val tabTextView = linearLayout?.getChildAt(1) as? TextView
+        tabTextView?.let {
+            TextViewCompat.setTextAppearance(it, textAppearanceRes)
+        }
+    } catch (_: Exception) {
+    }
 }
