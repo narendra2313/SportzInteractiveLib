@@ -53,8 +53,8 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:$hilt")
 
     def retrofit = "2.9.0"
-    implementation "com.squareup.retrofit2:retrofit:$retrofit"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    api "com.squareup.retrofit2:retrofit:$retrofit"
+    api "com.squareup.retrofit2:converter-gson:$retrofit"
 
     def okhttp = "4.10.0"
     implementation platform("com.squareup.okhttp3:okhttp-bom:$okhttp")
@@ -73,7 +73,7 @@ afterEvaluate {
 
                 groupId = 'com.github.narendra2313'
                 artifactId = 'sportz-interactive-lib'
-                version = '1.9'
+                version = '1.10'
             }
         }
     }
