@@ -1,6 +1,5 @@
 package com.example.silibrary.di
 
-import com.example.silibrary.BuildConfig
 import com.example.silibrary.utils.CurlLoggingInterceptor
 import com.example.silibrary.utils.CustomRequestInterceptor
 import com.example.silibrary.utils.CustomValues
@@ -45,11 +44,12 @@ object NetworkModule {
     fun providesOkHttpClient(
         httpLoggingInterceptor: HttpLoggingInterceptor,
         curlLoggingInterceptor: CurlLoggingInterceptor,
-        customRequestInterceptor: CustomRequestInterceptor
+        customRequestInterceptor: CustomRequestInterceptor,
+        customValues: CustomValues
     ): OkHttpClient {
         return OkHttpClient.Builder().readTimeout(15, TimeUnit.SECONDS)
             .connectTimeout(15, TimeUnit.SECONDS).addInterceptor(customRequestInterceptor).apply {
-                if (BuildConfig.DEBUG) {
+                if (customValues.isDebug) {
                     addInterceptor(httpLoggingInterceptor)
                     addInterceptor(curlLoggingInterceptor)
                     addNetworkInterceptor(StethoInterceptor())
