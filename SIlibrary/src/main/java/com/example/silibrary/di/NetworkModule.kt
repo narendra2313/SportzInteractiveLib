@@ -70,7 +70,7 @@ object NetworkModule {
         okHttpClient: OkHttpClient,
         gsonConverterFactory: GsonConverterFactory,
         customValues: CustomValues
-    ): Retrofit = Retrofit.Builder().baseUrl(customValues.baseUrl)
+    ): Retrofit = Retrofit.Builder().baseUrl(customValues.baseUrl ?: "")
         .addConverterFactory(gsonConverterFactory).client(okHttpClient).build()
 
 }
